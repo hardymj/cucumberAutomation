@@ -1,0 +1,28 @@
+{
+  "environment" : "Uat",
+  "browser": "chrome",
+  "timeout": 45000,
+  "longTimeout": 90000,
+  "loggingLevels": "error, info, verbose, debug",
+  "getQuoteAttempts": 5,
+  "purelyPetUrl":"purelypetsinsurance.co.uk",
+  "BuyOnlineURL": "https://staging-purelypets.ultimateins.co.uk/",
+  "DogInsuranceURL": "https://azuat.purelypetsinsurance.co.uk/dog-insurance/",
+  "CatInsuranceURL": "https://azuat.purelypetsinsurance.co.uk/cat-insurance/",
+  "PuppyInsuranceURL": "https://www.purelypetsinsurance.co.uk/puppy-insurance/",
+  "PetInsuranceURL": "https://www.purelypetsinsurance.co.uk/",
+  "BuyOnlineProdURL": "quote.purelypetsinsurance.co.uk",
+  "TrackAClaimURL": "https://azuat.purelypetsinsurance.co.uk/make-track-a-claim/",
+  "ManageYourPolicyURL": "https://azuat.purelypetsinsurance.co.uk/existing-customers/manage-my-policy/",
+  "ContactUsURL": "https://azuat.purelypetsinsurance.co.uk/existing-customers/contact-us/",
+  "SpeakToVetURL": "https://azuat.purelypetsinsurance.co.uk/speak-to-a-vet/",
+  "ComplaintURL": "https://azuat.purelypetsinsurance.co.uk/existing-customers/complaints/",
+  "OtherInsurancetURL": "https://azuat.purelypetsinsurance.co.uk/existing-customers/other-insurance-services/",
+  "BlogURL": "https://azuat.purelypetsinsurance.co.uk/blogs/",
+  "FAQsURL": "https://azuat.purelypetsinsurance.co.uk/faqs/",
+  "DogHealthURL": "https://azuat.purelypetsinsurance.co.uk/dog-health-behaviour",
+  "ManagePolicyURL": "https://azuat.purelypetsinsurance.co.uk/existing-customers/manage-my-policy/",
+  "clients":[]
+}
+
+
