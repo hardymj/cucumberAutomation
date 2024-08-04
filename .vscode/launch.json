@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [   
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "node_modules/@cucumber/cucumber/bin/cucumber-js",
+            "args": ["-p", "cli", "--config", "cucumber.js", "--fail-fast", "--tags", "@Budget and @Ping and @FailedLogin"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "openOnSessionStart",
+            "env": {
+                "NODE_ENV":"int",
+                "JOURNEY":"HouseholdQuote",
+                "BRAND":"BBG",
+                "ACCESSIBILITY":"false",
+                "BROWSER":"chrome",
+                "TUNNEL":"TRUE",
+                "DEV_TAG":"OP-953",
+                "LAMBDAUSERNAME":"IDO-e2etest3",
+                "LAMBDAKEY":"VrkGJUUOv1BKNdfApG6gIoX0iNr5CqhJyi0feabWaZPek9VOI3",
+                "CHROME_WINDOW_SIZE":"1024x768"
+            }
+        }
+    ]
+}

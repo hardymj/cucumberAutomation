@@ -1,0 +1,21 @@
+{
+    "testExplorer.useNativeTesting": true,
+    "debug.allowBreakpointsEverywhere": true,
+    "debug.javascript.autoAttachFilter": "always",
+    "cucumberTestRunner.env":{
+        "NODE_ENV":"int",
+        "JOURNEY":"HouseholdQuote",
+        "BRAND":"BBG",
+        "ACCESSIBILITY":"false",
+        "BROWSER":"chrome",
+        "TUNNEL":"TRUE",
+        "DEV_TAG":"OP-953",
+        "LAMBDAUSERNAME":"IDO-e2etest3",
+        "LAMBDAKEY":"VrkGJUUOv1BKNdfApG6gIoX0iNr5CqhJyi0feabWaZPek9VOI3",
+        "CHROME_WINDOW_SIZE":"1024x768"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "eslint.validate": ["javascript"]
+}
