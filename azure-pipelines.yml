@@ -1,19 +1,32 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: UseNode@1
+  inputs:
+    version: '20.11.0'
+  displayName: 'Install Node.js'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    cd PurelyPet
+  displayName: 'Move to PurelyPet folder'
+
+- script: |
+    cd PurelyPet
+    npm install
+  displayName: 'Install npm packages'
+
+- script: |
+    cd PurelyPet
+    npx cucumber-js --profile cli --config cucumber.js
+  displayName: 'Run Cucumber.js'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'PurelyPet/cucumber-report.html'
+    ArtifactName: 'CucumberReport'
+    publishLocation: 'Container'
+  displayName: 'Publish Cucumber Report'
