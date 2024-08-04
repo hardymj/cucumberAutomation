@@ -1,0 +1,36 @@
+{
+  "name": "cucumberpurelypet",
+  "version": "1.0.0",
+  "description": "Cucumber Purely Pet End to End Tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cucumber": "cucumber-js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@axe-core/webdriverjs": "^4.1.1",
+    "axe-reports": "^1.1.11",
+    "axios": "^0.21.1",
+    "config": "^3.3.3",
+    "cucumber-html-reporter": "^7.1.0",
+    "find-chrome-version": "^2.2.0",
+    "moment": "^2.29.1",
+    "randomstring": "^1.1.5",
+    "request": "^2.88.2",
+    "selenium-webdriver": "4.6.1",
+    "tcp-port-used": "^1.0.2",
+    "tunnel": "0.0.6",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^9.5.1",
+    "chai": "^4.3.7",
+    "eslint": "^8.51.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-loopback": "^13.1.0",
+    "eslint-plugin-jasmine": "^4.1.2",
+    "jasmine-reporters": "^2.3.2"
+  }
+}
