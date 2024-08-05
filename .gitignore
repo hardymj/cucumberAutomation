@@ -1,1 +1,5 @@
 chrome
+node_modules/
+reports/
+cucumber-report.html
+package-lock.json

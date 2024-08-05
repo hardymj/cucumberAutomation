@@ -12,13 +12,18 @@ class Logger {
         this._testCase = testCase;
     }
     log(type, message) {
-        if (this.folderDoesNotExist(folderName)) {
-            this.createFolder(folderName);
+        try{
+            if (this.folderDoesNotExist(folderName)) {
+                this.createFolder(folderName);
+            }
+            this.addToLogFile(
+                folderName + logfileName,
+                `${this.getDateAndTime()} - ${this._testCase} - ${type} - ${message} \n`,
+            );
         }
-        this.addToLogFile(
-            folderName + logfileName,
-            `${this.getDateAndTime()} - ${this._testCase} - ${type} - ${message} \n`,
-        );
+        catch(err){
+            console.log(err);
+        }
     }
 
     folderDoesNotExist(folder) {
@@ -34,11 +39,16 @@ class Logger {
     }
 
     createFolder(folder) {
-        fs.mkdir(folder, {
-            recuusive: true,
-        }, (err) => {
-            if (err) throw err;
-        });
+        try{
+            fs.mkdir(folder, {
+                recuusive: true,
+            }, (err) => {
+                if (err) throw err;
+            });
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     addToLogFile(logFileAndPath, message) {
