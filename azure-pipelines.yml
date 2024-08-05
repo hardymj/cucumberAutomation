@@ -1,6 +1,9 @@
 trigger:
 - main
 
+variables:
+  system.debug: 'true'
+
 pool:
   vmImage: 'windows-latest'
 
@@ -19,6 +22,7 @@ steps:
   displayName: 'Run Cucumber.js'
 
 - task: PublishBuildArtifacts@1
+  condition: always()
   inputs:
     PathtoPublish: 'cucumber-report.html'
     ArtifactName: 'CucumberReport'
@@ -26,6 +30,7 @@ steps:
   displayName: 'Publish Cucumber Report'
 
 - task: PublishBuildArtifacts@1
+  condition: always()
   inputs:
     PathtoPublish: 'logs/log.txt'
     ArtifactName: 'LogFile'
@@ -33,6 +38,7 @@ steps:
   displayName: 'Publish Log File'
   
 - task: PublishCucumberReport@1
+  condition: always()
   displayName: 'Publish Cucumber Report'
   inputs:
     jsonDir: ./results/cucumber
