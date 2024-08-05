@@ -19,6 +19,7 @@ steps:
 
 - script: |
     npx @puppeteer/browsers install chrome@127.0.6533.88
+  displayName: 'Install Chrome'
 
 - script: |
     npx cucumber-js --profile cli --config cucumber.js --tags "@SimpleTest"
@@ -44,8 +45,8 @@ steps:
   condition: always()
   displayName: 'Publish Cucumber Report'
   inputs:
-    jsonDir: ./results/cucumber
-    outputPath: ./results/cucumber
+    jsonDir: ./report/cucumber
+    outputPath: ./report/cucumber
     metadata: |
      {
        "ApplicationUrl": "$(App.Url)"
