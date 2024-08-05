@@ -30,15 +30,3 @@ steps:
     ArtifactName: 'CucumberReport'
     publishLocation: 'Container'
   displayName: 'Publish Cucumber Report'
-
-- task: PublishCucumberReport@1
-  displayName: 'Publish Cucumber Report'
-  inputs:
-    jsonDir: ./results/cucumber
-    outputPath: ./results/cucumber
-    metadata: |
-     {
-       "ApplicationUrl": "$(App.Url)"
-     }
-    name: 'Functional Tests'
-    title: API
