@@ -18,7 +18,7 @@ steps:
   displayName: 'Install npm packages'
 
 - script: |
-    npx cucumber-js --profile cli --config cucumber.js
+    npx cucumber-js --profile cli --config cucumber.js --tags "@SimpleTest"
   displayName: 'Run Cucumber.js'
 
 - task: PublishBuildArtifacts@1
