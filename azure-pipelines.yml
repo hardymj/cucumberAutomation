@@ -21,7 +21,7 @@ steps:
     npx cucumber-js --profile cli --config cucumber.js --tags "@SimpleTest"
   displayName: 'Run Cucumber.js'
 
-- task: PublishBuildArtifacts@1\
+- task: PublishBuildArtifacts@1
   condition: always()
   inputs:
     PathtoPublish: 'cucumber-report.html'
