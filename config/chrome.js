@@ -12,7 +12,7 @@ module.exports = {
     returnBrowser: async function() {
         try {
             const chromedriverDirectory = path.join(__dirname, '\\chromedriver\\lib\\chromedriver');
-            const chromeBinaryDirectory = path.join(__dirname, '..\\chrome\win64*\chrome-win64\Chrome.exe');
+            const chromeBinaryDirectory = path.join(__dirname, '..\\chrome\\win64-127.0.6533.88\\chrome-win64\\Chrome.exe');
             process.env.PATH = chromedriverDirectory + path.delimiter + process.env.PATH;
 
             const chromeOptions = new Options();
