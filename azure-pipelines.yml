@@ -25,6 +25,16 @@ steps:
     npx cucumber-js --profile cli --config cucumber.js --tags "@SimpleTest"
   displayName: 'Run Cucumber.js'
 
+- script: |
+    cd reports
+    rm cucumber.json
+  displayName: 'Delete cucumber.json'
+
+- script: |
+    cd logs
+    rm log.txt
+  displayName: 'Delete log file'
+
 - task: PublishBuildArtifacts@1
   condition: always()
   inputs:
