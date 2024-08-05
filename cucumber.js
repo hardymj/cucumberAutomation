@@ -4,6 +4,7 @@ const common = {
     format: ['./teamcity-cucumber-formatter',
         'html:cucumber-report.html',
         'json:reports/report.json',
+        'json:reports/cucumber.json',
     ],
     require: ['features/support/*.js'],
 };
