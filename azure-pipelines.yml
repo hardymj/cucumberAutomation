@@ -18,6 +18,9 @@ steps:
   displayName: 'Install npm packages'
 
 - script: |
+    npx @puppeteer/browsers install chrome@127.0.6533.88
+
+- script: |
     npx cucumber-js --profile cli --config cucumber.js --tags "@SimpleTest"
   displayName: 'Run Cucumber.js'
 
