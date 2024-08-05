@@ -11,25 +11,26 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    cd PurelyPet
-  displayName: 'Move to PurelyPet folder'
-
-- script: |
-    cd PurelyPet
     npm install
   displayName: 'Install npm packages'
 
 - script: |
-    cd PurelyPet
     npx cucumber-js --profile cli --config cucumber.js
   displayName: 'Run Cucumber.js'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'PurelyPet/cucumber-report.html'
+    PathtoPublish: 'cucumber-report.html'
     ArtifactName: 'CucumberReport'
     publishLocation: 'Container'
   displayName: 'Publish Cucumber Report'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'logs/log.txt'
+    ArtifactName: 'LogFile'
+    publishLocation: 'Container'
+  displayName: 'Publish Log File'
   
 - task: PublishCucumberReport@1
   displayName: 'Publish Cucumber Report'
