@@ -12,10 +12,12 @@ Background:Before Test Scenarios
     And I click on this button href "https://staging-purelypets.ultimateins.co.uk/"
     And I check I'm on the right page "BuyOnlineURL"
   
+@Hamburger
   Scenario:2 Click on Dog Insurance in Pet Insurance dropdown
     When I go to this url "https://azuat.purelypetsinsurance.co.uk/"
     And I check I'm on the right page "purelyPetUrl"
     And I accept cookies
+    And I click on this button class "hamburger" if found
     And I click on this button class "dropdown-toggle" option "1"
     And I click on this button href "/dog-insurance/"
     And I check I'm on the right page "DogInsuranceURL"

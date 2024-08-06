@@ -1079,3 +1079,41 @@ When('I wait for field xpath {string} to contain {string}', async function(field
         await assert.fail(e);
     }
 });
+
+When('I click on this button/link class {string} if found', async function(fieldString) {
+    try {
+        const field = By.className(`${fieldString}`);
+        await clickElementIfFound(field);
+    } catch (e) {
+        await logger.info(`Error click on the button ${e}`);
+        await assert.fail(e);
+    }
+});
+
+async function clickElementIfFound(field) {
+    try {
+        await logger.info(`Click on Element ${field}`);
+        const elements = await driver.findElements(field);
+        let fieldSelector=false;
+        for (i=0; i<elements.length; i++) {
+            const elementVisible = await driver.executeScript('return !!( arguments[0].offsetWidth && arguments[0].offsetHeight && arguments[0].getClientRects().length );', elements[i]);
+            if (elementVisible) {
+                fieldSelector = true;
+            }
+        }
+        if (fieldSelector) {
+            await waitForElement(field);
+            await driver.findElement(field).click();
+        }
+    } catch (err) {
+        if (err.name === 'ElementClickInterceptedError' ||
+        err.name === 'ElementNotInteractableError' ||
+        err.name == 'StaleElementReferenceError') {
+            const element = await driver.findElement(field);
+            await driver.executeScript('arguments[0].click()', element);
+        } else {
+            await logger.info(err);
+            throw err;
+        }
+    }
+}
