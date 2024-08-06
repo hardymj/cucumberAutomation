@@ -22,7 +22,7 @@ steps:
   displayName: 'Install Chrome'
 
 - script: |
-    npx cucumber-js --profile cli --config cucumber.js --tags "@SimpleTest"
+    npx cucumber-js --profile cli --config cucumber.js"
   displayName: 'Run Cucumber.js'
 
 - task: PublishBuildArtifacts@1
