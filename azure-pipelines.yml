@@ -1,6 +1,5 @@
 trigger:
 - main
-
 variables:
   system.debug: 'true'
 
@@ -8,6 +7,12 @@ pool:
   vmImage: 'windows-latest'
 
 steps:
+- task: ScreenResolutionUtility@1
+  inputs:
+    displaySettings: 'specific'
+    width: '1920'
+    height: '1080'
+
 - task: UseNode@1
   inputs:
     version: '20.11.0'
