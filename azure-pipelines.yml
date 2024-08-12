@@ -58,3 +58,9 @@ steps:
      }
     name: 'Functional Tests'
     title: API
+    
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'reports/report.xml'
+  
