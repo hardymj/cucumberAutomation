@@ -60,7 +60,7 @@ steps:
     title: API
 
 - script: |
-  node .\reporter\report-generator.js
+    node .\reporter\report-generator.js
   displayName: 'Run Cucumber to Junit'
   
 - task: PublishTestResults@2
