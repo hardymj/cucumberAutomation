@@ -236,7 +236,8 @@ Scenario:19 Click on the Explore link on dog cover level and validate Lifetime B
     And I wait for field class "col-xs-4 bronze cover-type" to contain "Lifetime cover"
     And I wait for field class "col-xs-4 bronze cover-type" to contain "Vets fees from £1,000-£5,000"
     And I wait for field class "col-xs-4 bronze cover-type" to contain "Flexible Excess Options"
-    
+
+  @FAQ
     Scenario:23 Validate FAQs section 
     When I go to this url "https://azuat.purelypetsinsurance.co.uk/"
     And I check I'm on the right page "purelyPetUrl"
