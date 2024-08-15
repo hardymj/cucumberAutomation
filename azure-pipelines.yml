@@ -68,3 +68,11 @@ steps:
     testResultsFormat: 'JUnit'
     testResultsFiles: 'reports/report.xml'
   
+- task: PowerShell@2
+  condition: always()
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Configuration
+      $global:cwd = Get-Location
+      $global:screenshotPath = Join-Path -Path $cwd -ChildPath "screenshots"
