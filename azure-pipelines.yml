@@ -62,8 +62,10 @@ steps:
 - script: |
     node .\reporter\report-generator2.js
   displayName: 'Run Cucumber to Junit'
+condition: always()
   
 - task: PublishTestResults@2
+condition: always()
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: 'reports/report2.xml'
