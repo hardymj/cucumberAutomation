@@ -62,7 +62,7 @@ steps:
 - script: |
     node .\reporter\report-generator2.js
   displayName: 'Run Cucumber to Junit'
-condition: always()
+  condition: always()
   
 - task: PublishTestResults@2
 condition: always()
