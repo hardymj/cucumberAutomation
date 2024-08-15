@@ -60,13 +60,13 @@ steps:
     title: API
 
 - script: |
-    node .\reporter\report-generator.js
+    node .\reporter\report-generator2.js
   displayName: 'Run Cucumber to Junit'
   
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: 'reports/report.xml'
+    testResultsFiles: 'reports/report2.xml'
   
 - task: PowerShell@2
   condition: always()
