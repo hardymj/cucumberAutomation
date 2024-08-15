@@ -65,7 +65,7 @@ steps:
   condition: always()
   
 - task: PublishTestResults@2
-condition: always()
+  condition: always()
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: 'reports/report2.xml'
