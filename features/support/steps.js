@@ -11,8 +11,6 @@ const cookies = require(`${topLevelFolder}lib/cookieBannerHelper`);
 const interactionHelper = require(`${topLevelFolder}/lib/interactionHelper`);
 const wait = require(`${topLevelFolder}lib/waitHelper`);
 const validationHelper = require('../../lib/validationHelper');
-const DataHelper = require(`${topLevelFolder}lib/dataHelper`);
-const dataHelper = new DataHelper();
 const dropdown = require('../../lib/dropdownHelper');
 
 setDefaultTimeout(60 * 1000);
@@ -21,13 +19,39 @@ After(async function(testCase) {
     try {
         const world = this;
         if (testCase.result.status === Status.FAILED) {
+            const folder = 'screenshots/';
+            const file = `${folder}${testCase.pickle.name}.png`;            
+            try {
+                fsp.writeFile(file, screenshot, 'base64');
+            } catch (err) {
+                logger.info(err);
+            }
+            await driver.takeScreenshot().then(function(screenshot) {
+                world.attach(`${file}`);
+            });
             await driver.takeScreenshot().then(function(screenshot) {
                 world.attach(screenshot, 'base64:image/png');
             });
         }
         if (driver !=undefined) {
-            await driver.close();
-            await driver.quit();
+            try{
+                let tabs = await driver.getAllWindowHandles();
+                for (let i = tabs.length; i > 0; i--) {
+                    await driver.switchTo().window(tabs[i - 1]);
+                    await driver.close();
+                }
+            }
+            catch(err){
+                await logger.info(`Error on close ${err}`);
+            }
+            finally{
+                try{
+                    await driver.quit();
+                }
+                catch(err){
+                        await logger.info(`Error on Quit ${err}`);
+                }
+            }
         }
     } catch (err) {
         await logger.error(`Failure on After Test run >${err}`);
@@ -327,19 +351,25 @@ When('I click on this button/link data-item-id {string} option {string}', async 
 });
 
 async function waitForPageToReload() {
-    let pageCheck;
-    let delay = 100;
-    while (delay > 0) {
-        pageCheck = await driver.executeScript(
-            'return document.readyState',
-        );
-        if (pageCheck == 'complete') {
-            break;
+    try{
+        let pageCheck;
+        let delay = 100;
+        while (delay > 0) {
+            pageCheck = await driver.executeScript(
+                'return document.readyState',
+            );
+            if (pageCheck == 'complete') {
+                break;
+            }
+            delay--;
+            await driver.sleep(100);
         }
-        delay--;
-        await driver.sleep(100);
+        return pageCheck === 'complete';
     }
-    return pageCheck === 'complete';
+    catch(err){
+        await logger.info(`Error when waiting for page to reload ${err}`);
+        return false;
+    }
 }
 
 async function clickElements(field, number) {
@@ -348,13 +378,19 @@ async function clickElements(field, number) {
         await waitForElement(field);
         const elements = await driver.findElements(field);
         const numberInt = parseInt(number)-1;
-        elements[numberInt].click();
+        await elements[numberInt].click();
     } catch (err) {
         if (err.name === 'ElementClickInterceptedError' ||
         err.name === 'ElementNotInteractableError' ||
         err.name == 'StaleElementReferenceError') {
             const element = await driver.findElement(field);
-            await driver.executeScript('arguments[0].click()', element);
+            try{
+                await driver.executeScript('arguments[0].click()', element);
+            }
+            catch(err){
+                await logger.info(`Failed to click using executeScript ${err}`);
+                throw err;
+            }
         } else {
             await logger.info(err);
             throw err;
@@ -372,7 +408,13 @@ async function clickElement(field) {
         err.name === 'ElementNotInteractableError' ||
         err.name == 'StaleElementReferenceError') {
             const element = await driver.findElement(field);
-            await driver.executeScript('arguments[0].click()', element);
+            try{
+                await driver.executeScript('arguments[0].click()', element);
+            }
+            catch(err){
+                await logger.info(`Failed to click using executeScript ${err}`);
+                throw err;
+            }
         } else {
             await logger.info(err);
             throw err;
@@ -1006,7 +1048,6 @@ When('I get the text from a dropdown class {string} and it goes into {string}', 
     const fieldBy = By.className(field);
     const element = await driver.findElement(fieldBy);
     let value = await driver.executeScript('return arguments[0].options[arguments[0].selectedIndex].text', element);
-    value = await dataHelper.onlyPriceFromText(value);
     try {
         await eval(`testData.${option}='${value}'`);
     } catch (err) {
@@ -1018,7 +1059,6 @@ When('I get the text from a field class {string} and it goes into {string}', asy
         const fieldBy = By.className(field);
         const element = await driver.findElement(fieldBy);
         let value = await element.getText();
-        value = await dataHelper.onlyPriceFromText(value);
         await eval(`testData.${option}='${value}'`);
     } catch (err) {
         await logger.info(err);
@@ -1079,41 +1119,3 @@ When('I wait for field xpath {string} to contain {string}', async function(field
         await assert.fail(e);
     }
 });
-
-When('I click on this button/link class {string} if found', async function(fieldString) {
-    try {
-        const field = By.className(`${fieldString}`);
-        await clickElementIfFound(field);
-    } catch (e) {
-        await logger.info(`Error click on the button ${e}`);
-        await assert.fail(e);
-    }
-});
-
-async function clickElementIfFound(field) {
-    try {
-        await logger.info(`Click on Element ${field}`);
-        const elements = await driver.findElements(field);
-        let fieldSelector=false;
-        for (i=0; i<elements.length; i++) {
-            const elementVisible = await driver.executeScript('return !!( arguments[0].offsetWidth && arguments[0].offsetHeight && arguments[0].getClientRects().length );', elements[i]);
-            if (elementVisible) {
-                fieldSelector = true;
-            }
-        }
-        if (fieldSelector) {
-            await waitForElement(field);
-            await driver.findElement(field).click();
-        }
-    } catch (err) {
-        if (err.name === 'ElementClickInterceptedError' ||
-        err.name === 'ElementNotInteractableError' ||
-        err.name == 'StaleElementReferenceError') {
-            const element = await driver.findElement(field);
-            await driver.executeScript('arguments[0].click()', element);
-        } else {
-            await logger.info(err);
-            throw err;
-        }
-    }
-}
